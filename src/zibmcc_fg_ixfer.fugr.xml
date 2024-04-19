@@ -1,0 +1,529 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<abapGit version="v1.0.0" serializer="LCL_OBJECT_FUGR" serializer_version="v1.0.0">
+ <asx:abap xmlns:asx="http://www.sap.com/abapxml" version="1.0">
+  <asx:values>
+   <AREAT>FG  IBM Content Collector index transfer</AREAT>
+   <INCLUDES>
+    <SOBJ_NAME>LZIBMCC_FG_IXFERTOP</SOBJ_NAME>
+    <SOBJ_NAME>SAPLZIBMCC_FG_IXFER</SOBJ_NAME>
+   </INCLUDES>
+   <FUNCTIONS>
+    <item>
+     <FUNCNAME>ZIBMCC_FM_IXF_MARK_FAILED</FUNCNAME>
+     <REMOTE_CALL>R</REMOTE_CALL>
+     <SHORT_TEXT>Clean up ZIBMCC_IXFTAB table</SHORT_TEXT>
+     <IMPORT>
+      <RSIMP>
+       <PARAMETER>ARCHIVE_ID</PARAMETER>
+       <TYP>SAEARCHIVI</TYP>
+      </RSIMP>
+     </IMPORT>
+     <TABLES>
+      <RSTBL>
+       <PARAMETER>ARC_DOC_IDS</PARAMETER>
+       <TYPES>O</TYPES>
+       <TYP>ZIBMCC_STRUCT_ARCHIVE_DOCID</TYP>
+      </RSTBL>
+     </TABLES>
+     <DOCUMENTATION>
+      <RSFDO>
+       <PARAMETER>ARCHIVE_ID</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Content Repository Identification</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>ARC_DOC_IDS</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>SELECT / WHERE clause</STEXT>
+      </RSFDO>
+     </DOCUMENTATION>
+    </item>
+    <item>
+     <FUNCNAME>ZIBMCC_FM_IXF_MARK_INCOMPLETE</FUNCNAME>
+     <REMOTE_CALL>R</REMOTE_CALL>
+     <SHORT_TEXT>Clean up ZIBMCC_IXFTAB table</SHORT_TEXT>
+     <IMPORT>
+      <RSIMP>
+       <PARAMETER>ARCHIVE_ID</PARAMETER>
+       <OPTIONAL>X</OPTIONAL>
+       <TYP>SAEARCHIVI</TYP>
+      </RSIMP>
+     </IMPORT>
+     <EXPORT>
+      <RSEXP>
+       <PARAMETER>NUM_ROWS_REMOVED</PARAMETER>
+       <TYP>INT4</TYP>
+      </RSEXP>
+     </EXPORT>
+     <TABLES>
+      <RSTBL>
+       <PARAMETER>ARC_DOC_IDS</PARAMETER>
+       <TYPES>O</TYPES>
+       <TYP>ZIBMCC_STRUCT_ARCHIVE_DOCID</TYP>
+      </RSTBL>
+     </TABLES>
+     <DOCUMENTATION>
+      <RSFDO>
+       <PARAMETER>ARCHIVE_ID</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Content Repository Identification</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>NUM_ROWS_REMOVED</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Number of rows with status=0 that have been removed</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>ARC_DOC_IDS</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>SELECT / WHERE clause</STEXT>
+      </RSFDO>
+     </DOCUMENTATION>
+    </item>
+    <item>
+     <FUNCNAME>ZIBMCC_FM_IXF_MARK_SUCCESSFUL</FUNCNAME>
+     <REMOTE_CALL>R</REMOTE_CALL>
+     <SHORT_TEXT>Update transfer status for given selection criteria.</SHORT_TEXT>
+     <IMPORT>
+      <RSIMP>
+       <PARAMETER>ARCHIVE_ID</PARAMETER>
+       <TYP>SAEARCHIVI</TYP>
+      </RSIMP>
+      <RSIMP>
+       <PARAMETER>NEW_STATUS</PARAMETER>
+       <TYP>CHAR1</TYP>
+      </RSIMP>
+     </IMPORT>
+     <TABLES>
+      <RSTBL>
+       <PARAMETER>ARC_DOC_IDS</PARAMETER>
+       <TYPES>O</TYPES>
+       <TYP>ZIBMCC_STRUCT_ARCHIVE_DOCID</TYP>
+      </RSTBL>
+     </TABLES>
+     <DOCUMENTATION>
+      <RSFDO>
+       <PARAMETER>ARCHIVE_ID</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Content Repository Identification</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>NEW_STATUS</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Single-character flag</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>ARC_DOC_IDS</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>SELECT / WHERE clause</STEXT>
+      </RSFDO>
+     </DOCUMENTATION>
+    </item>
+    <item>
+     <FUNCNAME>ZIBMCC_FM_SELECT_DATA</FUNCNAME>
+     <REMOTE_CALL>R</REMOTE_CALL>
+     <SHORT_TEXT>Select data from a table / view / join</SHORT_TEXT>
+     <IMPORT>
+      <RSIMP>
+       <PARAMETER>DELIMITER</PARAMETER>
+       <DEFAULT>&apos;|&apos;</DEFAULT>
+       <OPTIONAL>X</OPTIONAL>
+       <TYP>CHAR1</TYP>
+      </RSIMP>
+      <RSIMP>
+       <PARAMETER>ROWSTOSKIP</PARAMETER>
+       <DEFAULT>0</DEFAULT>
+       <OPTIONAL>X</OPTIONAL>
+       <TYP>INT4</TYP>
+      </RSIMP>
+      <RSIMP>
+       <PARAMETER>RESULTLIMIT</PARAMETER>
+       <DEFAULT>0</DEFAULT>
+       <OPTIONAL>X</OPTIONAL>
+       <TYP>INT4</TYP>
+      </RSIMP>
+      <RSIMP>
+       <PARAMETER>ARCHIVE_ID</PARAMETER>
+       <OPTIONAL>X</OPTIONAL>
+       <TYP>SAEARCHIVI</TYP>
+      </RSIMP>
+      <RSIMP>
+       <PARAMETER>START_DATE</PARAMETER>
+       <DEFAULT>0</DEFAULT>
+       <OPTIONAL>X</OPTIONAL>
+       <TYP>SAEABADATE</TYP>
+      </RSIMP>
+     </IMPORT>
+     <EXPORT>
+      <RSEXP>
+       <PARAMETER>ROWCOUNT</PARAMETER>
+       <TYP>INT4</TYP>
+      </RSEXP>
+      <RSEXP>
+       <PARAMETER>RESULTSIZE</PARAMETER>
+       <TYP>INT4</TYP>
+      </RSEXP>
+     </EXPORT>
+     <TABLES>
+      <RSTBL>
+       <PARAMETER>SELECTCLAUSE</PARAMETER>
+       <TYPES>O</TYPES>
+       <TYP>ZIBMCC_STRUCT_OPEN_SQL_CLAUSE</TYP>
+      </RSTBL>
+      <RSTBL>
+       <PARAMETER>FROMCLAUSE</PARAMETER>
+       <TYPES>O</TYPES>
+       <TYP>ZIBMCC_STRUCT_OPEN_SQL_CLAUSE</TYP>
+      </RSTBL>
+      <RSTBL>
+       <PARAMETER>WHERECLAUSE</PARAMETER>
+       <TYPES>O</TYPES>
+       <TYP>ZIBMCC_STRUCT_OPEN_SQL_CLAUSE</TYP>
+      </RSTBL>
+      <RSTBL>
+       <PARAMETER>ORDERBYCLAUSE</PARAMETER>
+       <TYPES>O</TYPES>
+       <TYP>ZIBMCC_STRUCT_OPEN_SQL_CLAUSE</TYP>
+      </RSTBL>
+      <RSTBL>
+       <PARAMETER>DATA</PARAMETER>
+       <DBSTRUCT>ZIBMCC_STRUCT_RESULT_DATA</DBSTRUCT>
+      </RSTBL>
+     </TABLES>
+     <EXCEPTION>
+      <RSEXC>
+       <EXCEPTION>UNKNOWN_DATABASE_OBJECT</EXCEPTION>
+      </RSEXC>
+      <RSEXC>
+       <EXCEPTION>TABLE_HAS_NO_FIELDS</EXCEPTION>
+      </RSEXC>
+      <RSEXC>
+       <EXCEPTION>TABLE_NOT_ACCESSIBLE</EXCEPTION>
+      </RSEXC>
+      <RSEXC>
+       <EXCEPTION>INSUFFICIANT_ACCESS_AUTHORITY</EXCEPTION>
+      </RSEXC>
+      <RSEXC>
+       <EXCEPTION>UNKNOWN_FIELD</EXCEPTION>
+      </RSEXC>
+      <RSEXC>
+       <EXCEPTION>ROW_DATA_TOO_LARGE</EXCEPTION>
+      </RSEXC>
+      <RSEXC>
+       <EXCEPTION>INCREMENTAL_MODE_NOT_SUPPORTED</EXCEPTION>
+      </RSEXC>
+      <RSEXC>
+       <EXCEPTION>INCORRECT_IMPORT_PARAMETER</EXCEPTION>
+      </RSEXC>
+      <RSEXC>
+       <EXCEPTION>INCORRECT_SELECT_CLAUSE</EXCEPTION>
+      </RSEXC>
+      <RSEXC>
+       <EXCEPTION>INCORRECT_FROM_CLAUSE</EXCEPTION>
+      </RSEXC>
+      <RSEXC>
+       <EXCEPTION>INCORRECT_WHERE_CLAUSE</EXCEPTION>
+      </RSEXC>
+      <RSEXC>
+       <EXCEPTION>OPEN_SQL_SYNTAX_ERROR</EXCEPTION>
+      </RSEXC>
+      <RSEXC>
+       <EXCEPTION>OPEN_SQL_SEMANTICS_ERROR</EXCEPTION>
+      </RSEXC>
+      <RSEXC>
+       <EXCEPTION>UNEXPECTED_ERROR</EXCEPTION>
+      </RSEXC>
+     </EXCEPTION>
+     <DOCUMENTATION>
+      <RSFDO>
+       <PARAMETER>DELIMITER</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Token to separate fields in a result row</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>ROWSTOSKIP</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Start returning at this row</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>RESULTLIMIT</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Maximum number of rows to be returned</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>ARCHIVE_ID</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Content Repository Identification</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>START_DATE</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>SAP ArchiveLink: Storage date</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>ROWCOUNT</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Number of rows associated with the composed select  statement</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>RESULTSIZE</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Number of rows returned in the result data  table</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>SELECTCLAUSE</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>SELECT clause</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>FROMCLAUSE</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>FROM clause</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>WHERECLAUSE</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>WHERE clause</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>ORDERBYCLAUSE</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>ORDER-BY clause</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>DATA</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Row type of the result data table (2000)</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>UNKNOWN_DATABASE_OBJECT</PARAMETER>
+       <KIND>X</KIND>
+       <STEXT>A table from &apos;from clause&apos; does not exist or is not active in the dictionary.</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>TABLE_HAS_NO_FIELDS</PARAMETER>
+       <KIND>X</KIND>
+       <STEXT>A table from the &apos;from clause&apos; does not have any fields.</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>TABLE_NOT_ACCESSIBLE</PARAMETER>
+       <KIND>X</KIND>
+       <STEXT>An error occurred when trying to access fields of  a table from &apos;from clause&apos;.</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>INSUFFICIANT_ACCESS_AUTHORITY</PARAMETER>
+       <KIND>X</KIND>
+       <STEXT>The user is not authorized to access a table from the &apos;from clause&apos;.</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>UNKNOWN_FIELD</PARAMETER>
+       <KIND>X</KIND>
+       <STEXT>A field does not exist in a table from the &apos;from clause&apos;.</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>ROW_DATA_TOO_LARGE</PARAMETER>
+       <KIND>X</KIND>
+       <STEXT>The size of the extracted data exceeds the limit of a &apos;data&apos; table row .</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>INCREMENTAL_MODE_NOT_SUPPORTED</PARAMETER>
+       <KIND>X</KIND>
+       <STEXT>This setting of &apos;start_date&apos; is not supported in the incremental mode.</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>INCORRECT_IMPORT_PARAMETER</PARAMETER>
+       <KIND>X</KIND>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>INCORRECT_SELECT_CLAUSE</PARAMETER>
+       <KIND>X</KIND>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>INCORRECT_FROM_CLAUSE</PARAMETER>
+       <KIND>X</KIND>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>INCORRECT_WHERE_CLAUSE</PARAMETER>
+       <KIND>X</KIND>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>OPEN_SQL_SYNTAX_ERROR</PARAMETER>
+       <KIND>X</KIND>
+       <STEXT>Incorrect statement composed of the &apos;SELECT&apos;/&apos;FROM&apos;/&apos;WHERE&apos;/&apos;ORDER&apos; clauses.</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>OPEN_SQL_SEMANTICS_ERROR</PARAMETER>
+       <KIND>X</KIND>
+       <STEXT>Incorrect statement composed of the &apos;SELECT&apos;/&apos;FROM&apos;/&apos;WHERE&apos;/&apos;ORDER&apos; clauses.</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>UNEXPECTED_ERROR</PARAMETER>
+       <KIND>X</KIND>
+       <STEXT>An unknown or unexpected exception was caught.</STEXT>
+      </RSFDO>
+     </DOCUMENTATION>
+    </item>
+   </FUNCTIONS>
+   <LONGTEXTS_ZIBMCC_FM_SELECT_DATA>
+    <item>
+     <DOKIL>
+      <ID>FU</ID>
+      <OBJECT>ZIBMCC_FM_SELECT_DATA</OBJECT>
+      <LANGU>D</LANGU>
+      <TYP>T</TYP>
+      <VERSION>0002</VERSION>
+      <MASTERLANG>X</MASTERLANG>
+      <TXTLINES>00035</TXTLINES>
+      <DOKSTATE>A</DOKSTATE>
+     </DOKIL>
+     <HEAD>
+      <TDOBJECT>DOKU</TDOBJECT>
+      <TDNAME>ZIBMCC_FM_SELECT_DATA</TDNAME>
+      <TDID>FU</TDID>
+      <TDSPRAS>D</TDSPRAS>
+      <TDFORM>S_DOCU_SHOW</TDFORM>
+      <TDSTYLE>S_DOCUS1</TDSTYLE>
+      <TDVERSION>00002</TDVERSION>
+      <TDLINESIZE>072</TDLINESIZE>
+     </HEAD>
+     <LINES>
+      <TLINE>
+       <TDFORMAT>U4</TDFORMAT>
+       <TDLINE>&amp;FUNCTIONALITY&amp;</TDLINE>
+      </TLINE>
+      <TLINE>
+       <TDFORMAT>AS</TDFORMAT>
+       <TDLINE>RFC_READ_TABLE liest die Definition und - auf Wunsch - auch den Inhalt</TDLINE>
+      </TLINE>
+      <TLINE>
+       <TDLINE>beliebiger, im Repository definierter Tabellen. Die Ausgabe von</TDLINE>
+      </TLINE>
+      <TLINE>
+       <TDLINE>Tabelleninhalten erfolgt in einem unstrukturierten Tabellenparameter</TDLINE>
+      </TLINE>
+      <TLINE>
+       <TDLINE>(DATA). In jeder Zeile von DATA wird eine Zeile aus der gelesenen</TDLINE>
+      </TLINE>
+      <TLINE>
+       <TDLINE>Tabelle angeliefert, wobei gelesene Feldinhalte hintereinander in CHAR-</TDLINE>
+      </TLINE>
+      <TLINE>
+       <TDLINE>Darstellung in das einzige Feld von DATA geschrieben werden. Der</TDLINE>
+      </TLINE>
+      <TLINE>
+       <TDLINE>Parameter FIELDS liefert dazu die Liste der gelesenen Felder und ihre</TDLINE>
+      </TLINE>
+      <TLINE>
+       <TDLINE>Position in DATA.</TDLINE>
+      </TLINE>
+      <TLINE>
+       <TDFORMAT>AS</TDFORMAT>
+       <TDLINE>Der Parameter FIELDS kann aber auch als Eingabeparameter dienen: Ist</TDLINE>
+      </TLINE>
+      <TLINE>
+       <TDLINE>FIELDS beim Aufruf nicht leer, so geht der Baustein davon aus, daß nur</TDLINE>
+      </TLINE>
+      <TLINE>
+       <TDLINE>die in FIELDS aufgeführten Felder gelesen werden sollen. Durch diese</TDLINE>
+      </TLINE>
+      <TLINE>
+       <TDLINE>Selektion von Feldern ist es möglich, auch in solchen Tabellen zu</TDLINE>
+      </TLINE>
+      <TLINE>
+       <TDLINE>lesen, die zu breit sind, um in eine Zeile von DATA zu passen.</TDLINE>
+      </TLINE>
+      <TLINE>
+       <TDFORMAT>AS</TDFORMAT>
+       <TDLINE>Im Parameter OPTIONS können Selektionskriterien übergeben werden, um</TDLINE>
+      </TLINE>
+      <TLINE>
+       <TDLINE>die Menge der zu lesenden Zeilen einzuschränken. RFC_READ_TABLE reicht</TDLINE>
+      </TLINE>
+      <TLINE>
+       <TDLINE>die Selektionsoptionen ohne Prüfung an ABAP/4-SQL weiter; bei</TDLINE>
+      </TLINE>
+      <TLINE>
+       <TDLINE>fehlerhafter Syntax löst der Baustein eine Ausnahme aus.</TDLINE>
+      </TLINE>
+      <TLINE>
+       <TDFORMAT>U4</TDFORMAT>
+       <TDLINE>&amp;EXAMPLE&amp;</TDLINE>
+      </TLINE>
+      <TLINE>
+       <TDFORMAT>AS</TDFORMAT>
+       <TDLINE>Der folgende Aufruf füllt die Tabelle DATA mit dem Inhalt der Tabelle</TDLINE>
+      </TLINE>
+      <TLINE>
+       <TDLINE>T005 im Format CSV (&quot;comma separated values&quot;):</TDLINE>
+      </TLINE>
+      <TLINE>
+       <TDFORMAT>/</TDFORMAT>
+      </TLINE>
+      <TLINE>
+       <TDFORMAT>/</TDFORMAT>
+       <TDLINE>  CALL FUNCTION &apos;RFC_READ_TABLE&apos;</TDLINE>
+      </TLINE>
+      <TLINE>
+       <TDFORMAT>/</TDFORMAT>
+       <TDLINE>       IMPORTING QUERY_TABLE = &apos;T005&apos;</TDLINE>
+      </TLINE>
+      <TLINE>
+       <TDFORMAT>/</TDFORMAT>
+       <TDLINE>                 DELIMITER   = &apos;,&apos;</TDLINE>
+      </TLINE>
+      <TLINE>
+       <TDFORMAT>/</TDFORMAT>
+       <TDLINE>       TABLES    DATA        = MY_DATA.</TDLINE>
+      </TLINE>
+      <TLINE>
+       <TDFORMAT>/</TDFORMAT>
+      </TLINE>
+      <TLINE>
+       <TDFORMAT>AS</TDFORMAT>
+       <TDLINE>In diesem Beispiel wird die Struktur der Tabelle TSTC bestimmt:</TDLINE>
+      </TLINE>
+      <TLINE>
+       <TDFORMAT>/</TDFORMAT>
+      </TLINE>
+      <TLINE>
+       <TDFORMAT>/</TDFORMAT>
+       <TDLINE>  CALL FUNCTION &apos;RFC_READ_TABLE&apos;</TDLINE>
+      </TLINE>
+      <TLINE>
+       <TDFORMAT>/</TDFORMAT>
+       <TDLINE>       IMPORTING QUERY_TABLE = &apos;TSTC&apos;</TDLINE>
+      </TLINE>
+      <TLINE>
+       <TDFORMAT>/</TDFORMAT>
+       <TDLINE>                 NO_DATA     = &apos;X&apos;</TDLINE>
+      </TLINE>
+      <TLINE>
+       <TDFORMAT>/</TDFORMAT>
+       <TDLINE>       TABLES    FIELDS      = MY_FIELDS.</TDLINE>
+      </TLINE>
+      <TLINE>
+       <TDFORMAT>/</TDFORMAT>
+      </TLINE>
+      <TLINE>
+       <TDFORMAT>U4</TDFORMAT>
+       <TDLINE>&amp;HINTS&amp;</TDLINE>
+      </TLINE>
+      <TLINE>
+       <TDFORMAT>AS</TDFORMAT>
+       <TDLINE>Der Funktionsbaustein überprüft das Vorhandensein einer Berechtigung</TDLINE>
+      </TLINE>
+      <TLINE>
+       <TDLINE>für das Berechtigungsobjekt S_TABU_DIS. Der Berechtigungsschutz ist</TDLINE>
+      </TLINE>
+      <TLINE>
+       <TDLINE>damit derselbe wie bei der Anzeige von Tabellen mit der Transaktion</TDLINE>
+      </TLINE>
+      <TLINE>
+       <TDLINE>SE16.</TDLINE>
+      </TLINE>
+     </LINES>
+    </item>
+   </LONGTEXTS_ZIBMCC_FM_SELECT_DATA>
+  </asx:values>
+ </asx:abap>
+</abapGit>
